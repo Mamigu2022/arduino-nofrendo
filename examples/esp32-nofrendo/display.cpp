@@ -8,55 +8,58 @@ extern "C"
 #include <Arduino_GFX_Library.h>
 
 /* M5Stack */
-#if defined(ARDUINO_M5Stack_Core_ESP32) || defined(ARDUINO_M5STACK_FIRE)
-
-#define TFT_BRIGHTNESS 255 /* 0 - 255 */
-#define TFT_BL 32
-Arduino_DataBus *bus = new Arduino_ESP32SPI(27 /* DC */, 14 /* CS */, SCK, MOSI, MISO);
-Arduino_ILI9342 *gfx = new Arduino_ILI9342(bus, 33 /* RST */, 1 /* rotation */);
-
-/* Odroid-Go */
-#elif defined(ARDUINO_ODROID_ESP32)
-
-#define TFT_BRIGHTNESS 191 /* 0 - 255 */
+//#if defined(ARDUINO_M5Stack_Core_ESP32) || defined(ARDUINO_M5STACK_FIRE)
+//
+////#define TFT_BRIGHTNESS 255 /* 0 - 255 */
+////#define TFT_BL 32
+////Arduino_DataBus *bus = new Arduino_ESP32SPI(27 /* DC */, 14 /* CS */, SCK, MOSI, MISO);
+////Arduino_ILI9341_M5STACK *gfx = new Arduino_ILI9341_M5STACK(bus, 33 /* RST */, 1 /* rotation */);
+//
+///* Odroid-Go */
+//#elif defined(ARDUINO_ODROID_ESP32)
+//
+////#define TFT_BRIGHTNESS 191 /* 0 - 255 */
+////#define TFT_BL 14
+////Arduino_DataBus *bus = new Arduino_ESP32SPI(21 /* DC */, 5 /* CS */, SCK, MOSI, MISO);
+////Arduino_ILI9341 *gfx = new Arduino_ILI9341(bus, -1 /* RST */, 3 /* rotation */);
+//
+///* TTGO T-Watch */
+//#elif defined(ARDUINO_T) || defined(ARDUINO_TWATCH_BASE) || defined(ARDUINO_TWATCH_2020_V1) || defined(ARDUINO_TWATCH_2020_V2) // TTGO T-Watch
+//
+////#define TFT_BRIGHTNESS 255 /* 0 - 255 */
+////#define TFT_BL 12
+////Arduino_DataBus *bus = new Arduino_ESP32SPI(27 /* DC */, 5 /* CS */, 18 /* SCK */, 19 /* MOSI */, -1 /* MISO */);
+////Arduino_ST7789 *gfx = new Arduino_ST7789(bus, -1 /* RST */, 1 /* rotation */, true /* IPS */, 240, 240, 0, 80);
+//
+///* custom hardware */
+//#else
+//
+#define TFT_BRIGHTNESS 32 /* 0 - 255 */
+//
+///* HX8357B */
+//// #define TFT_BL 27
+//// Arduino_DataBus *bus = new Arduino_ESP32SPI(-1 /* DC */, 5 /* CS */, 18 /* SCK */, 23 /* MOSI */, -1 /* MISO */);
+//// Arduino_TFT *gfx = new Arduino_HX8357B(bus, 33, 3 /* rotation */, true /* IPS */);
+//
+///* ST7789 ODROID Compatible pin connection */
+//// #define TFT_BL 14
+//// Arduino_DataBus *bus = new Arduino_ESP32SPI(21 /* DC */, 5 /* CS */, SCK, MOSI, MISO);
+//// Arduino_ST7789 *gfx = new Arduino_ST7789(bus, -1 /* RST */, 1 /* rotation */, true /* IPS */);
+//
+///* ST7796 on breadboard */
+//// #define TFT_BL 32
+////Arduino_DataBus *bus = new Arduino_ESP32SPI(32 /* DC */, -1 /* CS */, 25 /* SCK */, 33 /* MOSI */, -1 /* MISO */);
+////Arduino_TFT *gfx = new Arduino_ST7796(bus, -1 /* RST */, 1 /* rotation */);
+//
+///* ST7796 on LCDKit */
+//// #define TFT_BL 23
+//// Arduino_DataBus *bus = new Arduino_ESP32SPI(19 /* DC */, 5 /* CS */, 22 /* SCK */, 21 /* MOSI */, -1 /* MISO */);
+//// Arduino_ST7796 *gfx = new Arduino_ST7796(bus, 18, 1 /* rotation */);
 #define TFT_BL 14
-Arduino_DataBus *bus = new Arduino_ESP32SPI(21 /* DC */, 5 /* CS */, SCK, MOSI, MISO);
-Arduino_ILI9341 *gfx = new Arduino_ILI9341(bus, -1 /* RST */, 3 /* rotation */);
-
-/* TTGO T-Watch */
-#elif defined(ARDUINO_T) || defined(ARDUINO_TWATCH_BASE) || defined(ARDUINO_TWATCH_2020_V1) || defined(ARDUINO_TWATCH_2020_V2) // TTGO T-Watch
-
-#define TFT_BRIGHTNESS 255 /* 0 - 255 */
-#define TFT_BL 12
-Arduino_DataBus *bus = new Arduino_ESP32SPI(27 /* DC */, 5 /* CS */, 18 /* SCK */, 19 /* MOSI */, -1 /* MISO */);
-Arduino_ST7789 *gfx = new Arduino_ST7789(bus, -1 /* RST */, 1 /* rotation */, true /* IPS */, 240, 240, 0, 80);
-
-/* custom hardware */
-#else
-
-#define TFT_BRIGHTNESS 128 /* 0 - 255 */
-
-/* HX8357B */
-// #define TFT_BL 27
-// Arduino_DataBus *bus = new Arduino_ESP32SPI(-1 /* DC */, 5 /* CS */, 18 /* SCK */, 23 /* MOSI */, -1 /* MISO */);
-// Arduino_TFT *gfx = new Arduino_HX8357B(bus, 33, 3 /* rotation */, true /* IPS */);
-
-/* ST7789 ODROID Compatible pin connection */
-// #define TFT_BL 14
-// Arduino_DataBus *bus = new Arduino_ESP32SPI(21 /* DC */, 5 /* CS */, SCK, MOSI, MISO);
-// Arduino_ST7789 *gfx = new Arduino_ST7789(bus, -1 /* RST */, 1 /* rotation */, true /* IPS */);
-
-/* ST7796 on breadboard */
-// #define TFT_BL 32
-Arduino_DataBus *bus = new Arduino_ESP32SPI(32 /* DC */, -1 /* CS */, 25 /* SCK */, 33 /* MOSI */, -1 /* MISO */);
-Arduino_TFT *gfx = new Arduino_ST7796(bus, -1 /* RST */, 1 /* rotation */);
-
-/* ST7796 on LCDKit */
-// #define TFT_BL 23
-// Arduino_DataBus *bus = new Arduino_ESP32SPI(19 /* DC */, 5 /* CS */, 22 /* SCK */, 21 /* MOSI */, -1 /* MISO */);
-// Arduino_ST7796 *gfx = new Arduino_ST7796(bus, 18, 1 /* rotation */);
-
-#endif /* custom hardware */
+Arduino_DataBus *bus = new Arduino_ESP32SPI(21 /* DC */, 5 /* CS */, 18, 23,-1);
+Arduino_ILI9341 *gfx = new Arduino_ILI9341(bus, -1 /* RST */, 2 /* rotation */);
+//
+//#endif /* custom hardware */
 
 static int16_t w, h, frame_x, frame_y, frame_x_offset, frame_width, frame_height, frame_line_pixels;
 extern int16_t bg_color;
@@ -78,7 +81,7 @@ extern void display_begin()
 
 extern "C" void display_init()
 {
-    w = gfx->width();
+    w = gfx->width()-16;
     h = gfx->height();
     if (w < 480) // assume only 240x240 or 320x240
     {
@@ -92,7 +95,7 @@ extern "C" void display_init()
         }
         else
         {
-            frame_x = 0;
+            frame_x = 8;
             frame_x_offset = (NES_SCREEN_WIDTH - w) / 2;
             frame_width = w;
             frame_height = NES_SCREEN_HEIGHT;
